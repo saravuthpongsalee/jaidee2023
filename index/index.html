@@ -1,0 +1,773 @@
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport"
+    content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0,viewport-fit=cover" />
+  <title>LINE LIFF Share Messages By KruAun Jaidee</title>
+  <link rel="stylesheet" href="flex2html.css" />
+  <script type="text/javascript" src="flex2html.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.7.1.slim.min.js"
+    integrity="sha256-kmHvs0B+OpCW5GVHUNjv9rOmY0IvSIRcf7zGUDTDQM8=" crossorigin="anonymous"></script>
+  <!-- <script src="jquery-3.6.4.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script> -->
+  <style>
+    body {
+
+      /* box-sizing: border-box; */
+      /* border: 1px solid; */
+      /* margin: 30px 30px; */
+      /* box-decoration-break: unset; */
+      /* display: flex; */
+      /* align-items: center; */
+      /* justify-content: center; */
+      /* border-radius: 15px; */
+      background-color: rgb(13, 85, 119);
+      /* overflow: hidden;  */
+    }
+
+    input {
+      width: 30px;
+      border-radius: 5px;
+      box-shadow: 1px 1px 10px 0.5px grey;
+    }
+
+    #label1 {
+      margin-left: 0px;
+    }
+
+    #label2 {
+      margin-left: 0px;
+    }
+
+    .showImg {
+      max-width: 100%;
+      max-height: 100%;
+      display: contents;
+    }
+
+    #showtext {
+      white-space: pre-wrap;
+      white-space: -moz-pre-wrap;
+      white-space: -pre-wrap;
+      white-space: -o-pre-wrap;
+      word-wrap: break-word;
+      color: rgb(2, 91, 35);
+    }
+
+    #readtext {
+      white-space: pre-wrap;
+      white-space: -moz-pre-wrap;
+      white-space: -pre-wrap;
+      white-space: -o-pre-wrap;
+      word-wrap: break-word;
+      color: rgb(2, 91, 35);
+    }
+
+    .chatbox {
+      width: auto;
+      border: 1px;
+      border-radius: 5px;
+      z-index: 1;
+      background-color: rgb(13, 85, 119);
+    }
+
+    button {
+      border: none;
+      color: white;
+      padding: 40px 40px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin: 1px 3px;
+      width: 115px;
+    }
+
+    .img-circle {
+      border-radius: 50px;
+    }
+  </style>
+
+</head>
+
+<body>
+  <div class="container">
+    <form class="form-control-sm">
+      <center>
+        <img id="pictureUrl" class="img-circle mb-2 mt-3" alt="Cinque Terre" width="50" height="50" />
+        <p class="text-white mb-2" id="displayName"></p>
+      </center>
+      <p class="text-white mb-2" id="userId"></p>
+      <p class="text-white mb-2" id="statusMessage"></p>
+      <p class="text-white mb-2" id="getDecodedIDToken"></p>
+      <h2 class="mt-3 text-white">❤️ Share Target Picker ❤️</h2>
+      <button style="background-color: rgb(7, 170, 207); width: auto;" class="btn btn-outline-danger mb-3 text-white"
+        onclick="goSimulator()">
+        Flex Simulator
+      </button>
+      <br />
+      <label id="label1" class="text-white mb-3" for="">ข้อมูลที่ 1</label>
+      <input class="form-control mb-3 row=3" type="text" name="" id="textBox1" width="30px
+        " />
+
+      <label id="label2" class="text-white mb-3" for="">ข้อมูลที่ 2</label>
+
+      <textarea class="form-control" id="textBox2" width="30px"></textarea>
+
+      <br />
+
+      <div class="chatbox" id="">
+        <div class="showImg" id="flex1"></div>
+      </div>
+
+
+      <div style="background-color: white; padding: 10px; border-radius: 5px; width:100%;height:400px;"
+        class="mt-3 form-control" id="showtext"></div>
+      <div style="background-color: white; padding: 10px; border-radius: 5px; display: none;" class="mt-3 form-control"
+        id="readtext"></div>
+
+      <!-- <div class="google-map">
+          <iframe src='https://www.google.co.th/maps/place/' + lat + ',' + lon + '/@' + lat + ',' + lon
+            + ',275m/data=!3m1!1e3' width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div> -->
+
+      <p class="mb-3 mt-3 text-white">กดปุ่มเพื่อส่งไปหาเพื่อนของคุณ</p>
+      <div class="align-content-around">
+        <button style="background-color: rgb(123, 32, 175);" id="img-btn" class="btn btn-danger mb-3" type="button"
+          onclick="show_image()">
+          Show Image
+        </button>
+        <button style="background-color: rgb(8, 156, 156);" id="flex-btn" class="btn btn-danger mb-3" type="button"
+          onclick="showFlex()">
+          Show Flex
+        </button>
+        <button style="background-color: rgb(176, 11, 124);" id="text-btn" class="btn btn-danger mb-3" type="button"
+          onclick="showText()">
+          Show Text
+        </button>
+        <button style="background-color: rgb(236, 30, 188);" id="vdo-btn" class="btn btn-danger mb-3" type="button"
+          onclick="showVideo()">
+          Show Video
+        </button>
+        <button style="background-color: rgb(37, 138, 215);" id="audi-btn" class="btn btn-danger mb-3" type="button"
+          onclick="showAudio()">
+          Show Audio
+        </button>
+        <button style="background-color: rgb(239, 129, 26);" id="loc-btn" class="btn btn-danger mb-3" type="button"
+          onclick="getLocation()">
+          Show Loc
+        </button>
+        <button style="background-color: rgb(123, 32, 175);" id="send-img" class="btn btn-success mb-3" type="button"
+          onclick="sendImage()">
+          Send Image
+        </button>
+        <button style="background-color: rgb(8, 156, 156);" class="btn btn-danger mb-3" id="send-flex" type="button"
+          onclick="sendFlex()">
+          Send Flex
+        </button>
+        <button style="background-color: rgb(176, 11, 124);" id="send-text" class="btn btn-success mb-3" type="button"
+          onclick="sendText()">
+          Send Text
+        </button>
+
+        <button style="background-color: rgb(236, 30, 188);" id="send-vdo" class="btn btn-success mb-3" type="button"
+          onclick="sendVideo()">
+          Send Video
+        </button>
+        <button style="background-color: rgb(37, 138, 215);" id="send-audio" class="btn btn-success mb-3" type="button"
+          onclick="sendAudio()">
+          Send Audio
+        </button>
+        <button style="background-color: rgb(239, 129, 26);" id="send-lo" class="btn btn-primary mb-3" type="button"
+          onclick="sendLocation()">
+          Send Loc
+        </button>
+        <button style="background-color: rgb(31, 195, 17);" id="send-temp" class="btn btn-primary mb-3" type="button"
+          onclick="sendTemplate()">
+          Send Temp
+        </button>
+        <button style="background-color: rgb(29, 20, 148);" id="send-qr" class="btn btn-primary mb-3" type="button"
+          onclick="scanQrCode()">
+          Scan QR
+        </button>
+        <button style="background-color: rgb(148, 78, 20);" id="map-btn" class="btn btn-primary mb-3" type="button"
+          onclick="showMap()">
+          Show Map
+        </button>
+    </form>
+  </div>
+
+
+  <p class="mt-4 text-white" id="demo"></p>
+  <hr class="text-white" />
+  <center>
+    <p class="text-white">❤️ พัฒนาโดย ครูอั๋น ใจดี ❤️</p>
+    <p>
+      <a class="text-success mb-3" href="https://line.me/ti/p/~kruaun_jaidee">🟩 LINE Add friend คลิก</a><br />
+      <a class="text-primary" href="https://www.facebook.com/kruaunjaidee">🟦 Facebook Add friend
+        คลิก</a>
+    </p>
+
+  </center>
+  <br />
+  </div>
+
+
+
+
+  <script src="https://static.line-scdn.net/liff/edge/2.1/sdk.js"></script>
+  <script>
+    document.getElementById("send-img").style.display = "none";
+    document.getElementById("send-vdo").style.display = "none";
+    document.getElementById("send-vdo").style.display = "none";
+    document.getElementById("send-audio").style.display = "none";
+    document.getElementById("send-lo").style.display = "none";
+    //document.getElementById("send-temp").style.display = "none";
+    document.getElementById("send-text").style.display = "none";
+    document.getElementById("send-flex").style.display = "none";
+    document.getElementById("showtext").style.display = "none";
+    document.querySelector(".chatbox").style.display = "none";
+
+    function runApp() {
+      liff.getProfile().then(profile => {
+        document.getElementById("pictureUrl").src = profile.pictureUrl;  // %u0E41%u0E2A%u0E14%u0E07%u0E23%u0E39%u0E1B Profile %u0E17%u0E35%u0E48%u0E14%u0E36%u0E07%u0E21%u0E32
+        document.getElementById("userId").innerHTML = '<b>UserId:</b> ' + profile.userId;
+        document.getElementById("displayName").innerHTML = '<b>สวัสดี:</b> ' + profile.displayName; // %u0E41%u0E2A%u0E14%u0E07%u0E0A%u0E37%u0E48%u0E2D Line %u0E02%u0E2D%u0E07%u0E1C%u0E39%u0E49%u0E43%u0E0A%u0E49
+        document.getElementById("statusMessage").innerHTML = '<b>StatusMessage:</b> ' + profile.statusMessage;  // %u0E41%u0E2A%u0E14%u0E07%u0E2A%u0E16%u0E32%u0E19%u0E30%u0E02%u0E2D%u0E07%u0E1C%u0E39%u0E49%u0E43%u0E0A%u0E49 Line
+        //document.getElementById("getDecodedIDToken").innerHTML = '<b>Email:</b> ' + liff.getDecodedIDToken().email;
+      }).catch(err => console.error(err));
+    }
+    liff.init({ liffId: "2000563749-xo0QX4Ny" }, () => { // เปลี่ยน LIFF ID 
+      if (liff.isLoggedIn()) {
+        runApp()
+      } else {
+        liff.login();
+      }
+    }, err => console.error(err.code, error.message));
+
+    // logout
+    const accessToken = liff.getAccessToken();
+    if (accessToken) {
+      fetch("https://api...", {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${accessToken}`
+        }
+        //...
+      });
+    }
+
+
+    var getLat = document.getElementById("textBox1").value;
+    var getLon = document.getElementById("textBox2").value;
+    var getMapError = document.getElementById("showtext")
+
+    function getLocation() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
+      } else {
+        getMapError.innerText = "Geolocation is not supported by this browser.";
+      }
+      document.getElementById("vdo-btn").style.display = "none";
+      document.getElementById("text-btn").style.display = "none";
+      document.getElementById("img-btn").style.display = "none";
+      document.getElementById("flex-btn").style.display = "none";
+      document.getElementById("send-lo").style.display = "none";
+      document.getElementById("send-audio").style.display = "none";
+      document.getElementById("send-vdo").style.display = "none";
+      document.getElementById("send-text").style.display = "none";
+      document.getElementById("send-img").style.display = "none";
+      document.getElementById("send-flex").style.display = "none";
+      document.getElementById("send-qr").style.display = "none";
+      document.getElementById("loc-btn").style.display = "none";
+      document.getElementById("showtext").style.display = "none";
+      document.getElementById("map-btn").style.display = "block";
+      document.querySelector(".chatbox").style.display = "none";
+      document.getElementById("audi-btn").style.display = "none";
+      document.getElementById("send-temp").style.display = "none";
+    }
+
+    function showPosition(position) {
+      getLat = position.coords.latitude;
+      getLon = position.coords.longitude;
+      console.log(getLat);
+      console.log(getLon);
+      document.getElementById("textBox1").value = getLat;
+      document.getElementById("textBox2").value = getLon;
+    }
+
+    function showMap() {
+      var mapProp = {
+        center: new google.maps.LatLng(getLat, getLon),
+        zoom: 18,
+      };
+      var map = new google.maps.Map(document.querySelector("#showtext"), mapProp);
+      var marker = new google.maps.Marker({
+        position: new google.maps.LatLng(getLat, getLon),
+        animation: google.maps.Animation.BOUNCE
+      });
+
+      marker.setMap(map);
+      document.getElementById("showtext").style.display = "block";
+    }
+
+    async function scanQrCode() {
+      const result = await liff.scanCodeV2()
+      document.getElementById("textBox2").append(result.value)
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: "Scan เรียบร้อย !",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+
+      document.getElementById("vdo-btn").style.display = "none";
+      document.getElementById("text-btn").style.display = "block";
+      document.getElementById("img-btn").style.display = "none";
+      document.getElementById("flex-btn").style.display = "none";
+      document.getElementById("send-lo").style.display = "none";
+      document.getElementById("send-audio").style.display = "none";
+      document.getElementById("send-vdo").style.display = "none";
+      document.getElementById("send-text").style.display = "block";
+      document.getElementById("send-img").style.display = "none";
+      document.getElementById("send-flex").style.display = "none";
+      document.getElementById("send-qr").style.display = "none";
+      document.getElementById("loc-btn").style.display = "none";
+      document.getElementById("showtext").style.display = "none";
+      document.getElementById("map-btn").style.display = "none";
+      document.getElementById("readtext").style.display = "block";
+      document.querySelector(".chatbox").style.display = "none";
+      document.getElementById("audi-btn").style.display = "none";
+      document.getElementById("send-temp").style.display = "none";
+    }
+
+    function showVideo() {
+      var src = document.getElementById("textBox1").value
+      var vdo = document.createElement("video");
+      vdo.src = src;
+      vdo.play()
+      vdo.setAttribute('width', '100%')
+      vdo.setAttribute('width', '100%')
+      document.getElementById("flex1").appendChild(vdo);
+      // document.body.appendChild(img);
+      document.getElementById("vdo-btn").style.display = "none";
+      document.getElementById("text-btn").style.display = "none";
+      document.getElementById("img-btn").style.display = "none";
+      document.getElementById("flex-btn").style.display = "none";
+      document.getElementById("send-lo").style.display = "none";
+      document.getElementById("send-audio").style.display = "none";
+      document.getElementById("send-vdo").style.display = "block";
+      document.getElementById("send-text").style.display = "none";
+      document.getElementById("send-img").style.display = "none";
+      document.getElementById("send-flex").style.display = "none";
+      document.getElementById("send-qr").style.display = "none";
+      document.getElementById("loc-btn").style.display = "none";
+      document.getElementById("showtext").style.display = "none";
+      document.querySelector(".chatbox").style.display = "block";
+      document.getElementById("map-btn").style.display = "none";
+      document.getElementById("audi-btn").style.display = "none";
+      document.getElementById("send-temp").style.display = "none";
+    }
+
+    function showAudio() {
+      var src = document.getElementById("textBox2").value
+      var audio = document.createElement("audio");
+      audio.src = src;
+      audio.play();
+      // document.getElementById("flex1").appendChild(vdo);
+      // document.body.appendChild(img);
+      document.getElementById("vdo-btn").style.display = "none";
+      document.getElementById("text-btn").style.display = "none";
+      document.getElementById("img-btn").style.display = "none";
+      document.getElementById("flex-btn").style.display = "none";
+      document.getElementById("send-lo").style.display = "none";
+      document.getElementById("send-audio").style.display = "block";
+      document.getElementById("send-vdo").style.display = "none";
+      document.getElementById("send-text").style.display = "none";
+      document.getElementById("send-img").style.display = "none";
+      document.getElementById("send-flex").style.display = "none";
+      document.getElementById("send-qr").style.display = "none";
+      document.getElementById("loc-btn").style.display = "none";
+      document.getElementById("showtext").style.display = "none";
+      document.querySelector(".chatbox").style.display = "block";
+      document.getElementById("map-btn").style.display = "none";
+      document.getElementById("audi-btn").style.display = "none";
+      document.getElementById("send-temp").style.display = "none";
+
+      document.getElementById("send-audio").addEventListener("click", () => { audio.pause() })
+
+    }
+
+    function showFlex() {
+      var x = document.getElementById("textBox2").value;
+      try {
+        document.getElementById('flex1').innerHTML = "";
+        x = JSON.parse(x)
+        console.log(x)
+        var flexdat = {}
+        flexdat["type"] = "flex";
+        flexdat["altText"] = "Flex Message";
+        flexdat["contents"] = x;
+        flex2html("flex1", flexdat);
+
+        document.getElementById("vdo-btn").style.display = "none";
+        document.getElementById("text-btn").style.display = "none";
+        document.getElementById("img-btn").style.display = "none";
+        document.getElementById("flex-btn").style.display = "none";
+        document.getElementById("send-lo").style.display = "none";
+        document.getElementById("send-audio").style.display = "none";
+        document.getElementById("send-vdo").style.display = "none";
+        document.getElementById("send-text").style.display = "none";
+        document.getElementById("send-img").style.display = "none";
+        document.getElementById("send-flex").style.display = "block";
+        document.getElementById("send-qr").style.display = "none";
+        document.getElementById("loc-btn").style.display = "none";
+        document.getElementById("showtext").style.display = "none";
+        document.querySelector(".chatbox").style.display = "block";
+        document.getElementById("map-btn").style.display = "none";
+        document.getElementById("audi-btn").style.display = "none";
+        document.getElementById("send-temp").style.display = "none";
+      }
+      catch (err) {
+        console.log(err)
+        document.getElementById('flex1').innerHTML = "";
+      }
+    }
+
+    function showText() {
+      var text = document.getElementById("textBox2").value;
+      document.getElementById('readtext').innerText = text;
+
+      document.getElementById("vdo-btn").style.display = "none";
+      document.getElementById("text-btn").style.display = "none";
+      document.getElementById("img-btn").style.display = "none";
+      document.getElementById("flex-btn").style.display = "none";
+      document.getElementById("send-lo").style.display = "none";
+      document.getElementById("send-audio").style.display = "none";
+      document.getElementById("send-vdo").style.display = "none";
+      document.getElementById("send-text").style.display = "block";
+      document.getElementById("send-img").style.display = "none";
+      document.getElementById("send-flex").style.display = "none";
+      document.getElementById("send-qr").style.display = "none";
+      document.getElementById("loc-btn").style.display = "none";
+      document.getElementById("showtext").style.display = "none";
+      document.querySelector(".chatbox").style.display = "none";
+      document.getElementById("map-btn").style.display = "none";
+      document.getElementById("readtext").style.display = "block";
+      document.getElementById("audi-btn").style.display = "none";
+      document.getElementById("send-temp").style.display = "none";
+    }
+
+
+    function show_image() {
+      var src = document.getElementById("textBox2").value
+      var img = document.createElement("img");
+      img.src = src;
+      img.setAttribute('width', '100%')
+      img.setAttribute('width', '100%')
+      document.getElementById("flex1").appendChild(img);
+      // document.body.appendChild(img);
+      document.getElementById("vdo-btn").style.display = "none";
+      document.getElementById("text-btn").style.display = "none";
+      document.getElementById("img-btn").style.display = "none";
+      document.getElementById("flex-btn").style.display = "none";
+      document.getElementById("send-lo").style.display = "none";
+      document.getElementById("send-audio").style.display = "none";
+      document.getElementById("send-vdo").style.display = "none";
+      document.getElementById("send-text").style.display = "none";
+      document.getElementById("send-img").style.display = "block";
+      document.getElementById("send-flex").style.display = "none";
+      document.getElementById("send-qr").style.display = "none";
+      document.getElementById("loc-btn").style.display = "none";
+      document.getElementById("showtext").style.display = "none";
+      document.querySelector(".chatbox").style.display = "block";
+      document.getElementById("map-btn").style.display = "none";
+      document.getElementById("audi-btn").style.display = "none";
+      document.getElementById("send-temp").style.display = "none";
+    }
+    //จบฟังก์ชั่น
+
+    function sendFlex() {
+      var altText = document.getElementById("textBox1").value;
+      var message = document.getElementById("textBox2").value;
+      // document.getElementById("demo").innerHTML = message;
+
+      liff.init({ liffId: "2000563749-xo0QX4Ny" });
+      // liff.id equals to liffId
+      liff.ready.then(() => {
+        liff.shareTargetPicker([
+          {
+            type: "flex",
+            altText: altText,
+            contents: JSON.parse(message),
+          },
+        ])
+          .then(() => {
+            Swal.fire({
+              position: "center",
+              icon: "success",
+              title: "ส่ง Flex เรียบร้อย !",
+              showConfirmButton: false,
+              timer: 1500,
+            });
+            document.getElementById("textBox1").value = "";
+            document.getElementById("textBox2").value = "";
+
+            console.log("message sent");
+          })
+          .catch((err) => {
+            console.log("error", err);
+          });
+      });
+    }
+    //จบฟังก์ชั่น
+
+
+    function sendText() {
+      var textUser = document.getElementById("textBox2").value
+
+      liff.init({ liffId: "2000563749-xo0QX4Ny" });
+      // liff.id equals to liffId
+      liff.ready.then(() => {
+        liff.shareTargetPicker([
+          {
+            "type": "text",
+            "text": textUser,
+          },
+        ])
+          .then(() => {
+            Swal.fire({
+              position: "center",
+              icon: "success",
+              title: "ส่งข้อความเรียบร้อย !",
+              showConfirmButton: false,
+              timer: 1500,
+            });
+            document.getElementById("textBox1").value = "";
+            document.getElementById("textBox2").value = "";
+
+            console.log("message sent");
+            outLiff()
+          })
+          .catch((err) => {
+            console.log("error", err);
+            outLiff()
+          });
+      });
+    }
+    //จบฟังก์ชั่น
+
+
+    function sendTemplate() {
+      // var template = JSON.parse(String($('#textBox2').val()))
+      var template = JSON.parse(document.querySelector('#textBox2').value)
+      console.log(template)
+      liff.init({ liffId: "2000563749-xo0QX4Ny" });
+      // liff.id equals to liffId
+      liff.ready.then(() => {
+        liff.shareTargetPicker([
+          template
+        ])
+          .then(() => {
+            Swal.fire({
+              position: "center",
+              icon: "success",
+              title: "ส่งข้อความเรียบร้อย !",
+              showConfirmButton: false,
+              timer: 1500,
+            });
+            document.getElementById("textBox1").value = "";
+            document.getElementById("textBox2").value = "";
+
+            console.log("message sent");
+          })
+          .catch((err) => {
+            console.log("error", err);
+          });
+      });
+    }
+
+    //จบฟังก์ชั่น
+    function sendImage() {
+      var link1 = document.getElementById("textBox1").value;
+      var link2 = document.getElementById("textBox2").value
+
+      liff.init({ liffId: "2000563749-xo0QX4Ny" });
+      // liff.id equals to liffId
+      liff.ready.then(() => {
+        liff.shareTargetPicker([
+          {
+            "type": "image",
+            "originalContentUrl": link1,
+            "previewImageUrl": link2
+          },
+        ])
+          .then(() => {
+            Swal.fire({
+              position: "center",
+              icon: "success",
+              title: "ส่งภาพเรียบร้อย !",
+              showConfirmButton: false,
+              timer: 1500,
+            });
+            document.getElementById("textBox1").value = "";
+            document.getElementById("textBox2").value = "";
+
+            console.log("message sent");
+          })
+          .catch((err) => {
+            console.log("error", err);
+          });
+      });
+    }
+
+    //จบฟังก์ชั่น
+    function sendVideo() {
+      var linkV1 = document.getElementById("textBox1").value;
+      var linkV2 = document.getElementById("textBox2").value
+
+      liff.init({ liffId: "2000563749-xo0QX4Ny" });
+      // liff.id equals to liffId
+      liff.ready.then(() => {
+        liff.shareTargetPicker([
+          {
+            "type": "video",
+            "originalContentUrl": linkV1,
+            "previewImageUrl": linkV2,
+            //"trackingId": "track-id"
+          },
+        ])
+          .then(() => {
+            Swal.fire({
+              position: "center",
+              icon: "success",
+              title: "ส่งวิดีโอเรียบร้อย !",
+              showConfirmButton: false,
+              timer: 1500,
+            });
+            document.getElementById("textBox1").value = "";
+            document.getElementById("textBox2").value = "";
+
+            console.log("message sent");
+          })
+          .catch((err) => {
+            console.log("error", err);
+          });
+      });
+    }
+
+    //จบฟังก์ชั่น
+    function sendAudio() {
+      var duration = document.getElementById("textBox1").value
+      var sound = document.getElementById("textBox2").value
+
+      liff.init({ liffId: "2000563749-xo0QX4Ny" });
+      // liff.id equals to liffId
+      liff.ready.then(() => {
+        liff.shareTargetPicker([
+          {
+            "type": "audio",
+            "originalContentUrl": sound,
+            "duration": duration
+          },
+        ])
+          .then(() => {
+            Swal.fire({
+              position: "center",
+              icon: "success",
+              title: "ส่งเสียงเรียบร้อย !",
+              showConfirmButton: false,
+              timer: 1500,
+            });
+            document.getElementById("textBox1").value = "";
+            document.getElementById("textBox2").value = "";
+
+            console.log("message sent");
+          })
+          .catch((err) => {
+            console.log("error", err);
+          });
+      });
+    }
+
+    //จบฟังก์ชั่น
+    function sendLocation() {
+      var lat = document.getElementById("textBox1").value;
+      var lon = document.getElementById("textBox2").value
+
+      liff.init({ liffId: "2000563749-xo0QX4Ny" });
+      // liff.id equals to liffId
+      liff.ready.then(() => {
+        liff.shareTargetPicker([
+          {
+            "type": "location",
+            "title": "คุณได้รับโลเคชั่น จากฉันแล้ว...",
+            "address": "ที่อยู่นี้สามารถดูได้จากแผนที่",
+            "latitude": lat,
+            "longitude": lon
+          },
+        ])
+          .then(() => {
+            Swal.fire({
+              position: "center",
+              icon: "success",
+              title: "ส่งโลเคชั่นเรียบร้อย !",
+              showConfirmButton: false,
+              timer: 1500,
+            });
+            document.getElementById("textBox1").value = "";
+            document.getElementById("textBox2").value = "";
+
+            console.log("message sent");
+          })
+          .catch((err) => {
+            console.log("error", err);
+          });
+      });
+    }
+
+
+
+    function goSimulator() {
+      liff.openWindow({
+        url: "https://developers.line.biz/flex-simulator/",
+        external: true,
+      });
+    }
+
+
+  </script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAms4sw8603QO1OBFHmcT99jaJgUyIzGr0"></script>
+  <!-- src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAms4sw8603QO1OBFHmcT99jaJgUyIzGr0&callback=showMap"></script> -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</body>
+
+</html>
+
+
+
+<!-- แสดงรูป -->
+<!-- <input id="img" type="text" onchange="addImage();">
+<div id="imageshow"></div>
+<script>
+  function addImage() {
+
+    var src = document.getElementById("textbox2").value
+    show_image(src);
+  }
+
+
+  function show_image(src) {
+    var img = document.createElement("img");
+    img.src = src;
+    document.body.appendChild(img);
+  }
+</script> -->
+
+<!--  -->
